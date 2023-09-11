@@ -11,8 +11,16 @@ const allUsers = async (req, res) => {
           ],
         }
       : {};
+      console.log(req.query.search);
 
-    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+    const users = await User.find({
+      name:req.query.search
+
+    })
+    // const arr=users.map((item)=>(
+    //    item.name
+    // ))
+    console.log(users);
     res.send(users);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
